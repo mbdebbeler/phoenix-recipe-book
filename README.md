@@ -1,4 +1,4 @@
-# Recipebook
+# Recipe Book[![Build Status](https://travis-ci.org/mbdebbeler/phoenix-recipe-book.svg?branch=master)](https://travis-ci.org/mbdebbeler/phoenix-recipe-book)
 
 To start your Phoenix server:
 
