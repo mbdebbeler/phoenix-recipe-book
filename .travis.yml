@@ -6,17 +6,21 @@ elixir:
 services:
   - postgresql
 
+before_install:
+  - chmod +x ./scripts/*
+
 before_script:
   - mix do ecto.create, ecto.migrate
 
 script:
   - mix test
+  - ./scripts/zip_project.sh
 
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    local_dir: recipebook
+    local_dir: zipped_project
     skip_cleanup: true
     bucket: mbdebbeler-apprenticeship-2
     region: us-east-2
@@ -28,7 +32,7 @@ deploy:
     bucket: mbdebbeler-apprenticeship-2
     key: latest.zip
     bundle_type: zip
-    application: recipebook
+    application: phoenix_recipe_book
     deployment_group: apprenticeship
     wait_until_deployed: true
     on:
