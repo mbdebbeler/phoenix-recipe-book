@@ -14,6 +14,7 @@ before_script:
 
 script:
   - mix test
+  - ./scripts/build_artifacts.sh
   - ./scripts/zip_project.sh
 
 deploy:

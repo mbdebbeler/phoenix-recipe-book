@@ -18,4 +18,18 @@ defmodule RecipebookWeb.RecipeController do
           render(conn, "show.json", recipe: recipe)
         end
       end
+
+  def create(conn, %{"title" => title, "servings" => servings} = recipe_params) do
+    case Binder.create_recipe(recipe_params) do
+      {:ok, recipe} ->
+        conn
+        |> put_status(:created)
+        |> render("show.json", recipe: recipe)
+      {:error, _changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> text("Could not create recipe")
     end
+  end
+
+end

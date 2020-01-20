@@ -32,7 +32,7 @@ config :recipebook, RecipebookWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :recipebook, RecipebookWeb.Endpoint, server: true
+    config :recipebook, RecipebookWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
