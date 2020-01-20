@@ -3,10 +3,11 @@ defmodule RecipebookWeb.RecipeControllerTest do
 
   alias Recipebook.Binder
   @create_attrs %{title: "Ice Cubes", servings: "1"}
+  @invalid_attrs %{title: nil, servings: nil}
 
   describe "index/2" do
     setup [:create_recipe]
-    test "index/2 responds with all recipes", %{conn: conn, recipe: recipe} do
+    test "Responds with all recipes", %{conn: conn, recipe: recipe} do
 
       response = conn
       |> get(Routes.recipe_path(conn, :index))
@@ -40,6 +41,39 @@ defmodule RecipebookWeb.RecipeControllerTest do
         assert text_response(conn, 404) =~ "Recipe not found"
       end
     end
+
+  describe "create/2" do
+
+    test "Renders show when data is valid", %{conn: conn} do
+      response =
+        conn
+        |> post(Routes.recipe_path(conn, :create), @create_attrs)
+        |> json_response(201)
+
+
+        created_recipe = Recipebook.Repo.get_by(Binder.Recipe, @create_attrs)
+
+        expected = %{
+          "data" =>
+          %{"title" => "Ice Cubes", "servings" => "1"}
+        }
+
+        assert created_recipe
+        assert response == expected
+      end
+
+      test "Renders error when data is invalid", %{conn: conn} do
+        response =
+          conn
+          |> post(Routes.recipe_path(conn, :create), @invalid_attrs)
+          |> text_response(422)
+
+          expected = "Could not create recipe"
+
+          assert response == expected
+        end
+
+  end
 
   defp create_recipe(_) do
     {:ok, recipe} = Binder.create_recipe(@create_attrs)
