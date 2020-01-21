@@ -47,4 +47,20 @@ defmodule RecipebookWeb.RecipeController do
     end
   end
 
+  def update(conn, %{"id" => id, "recipe" => recipe_params}) do
+    recipe = Binder.get_recipe!(id)
+
+    case Binder.update_recipe(recipe, recipe_params) do
+      {:ok, recipe} ->
+        conn
+        |> put_status(:ok)
+        |> render("show.json", recipe: recipe)
+      {:error, _changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> text("Could not update recipe")
+      end
+  end
+
+
 end
