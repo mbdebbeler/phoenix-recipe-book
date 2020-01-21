@@ -25,7 +25,6 @@ defmodule RecipebookWeb.RecipeControllerTest do
   describe "show/2" do
     setup [:create_recipe]
     test "Responds with recipe info if the recipe is found", %{conn: conn, recipe: recipe} do
-
       response =
         conn
         |> get(Routes.recipe_path(conn, :show, recipe.id))
@@ -42,42 +41,62 @@ defmodule RecipebookWeb.RecipeControllerTest do
       end
     end
 
-  describe "create/2" do
+    describe "create/2" do
 
-    test "Renders show when data is valid", %{conn: conn} do
-      response =
-        conn
-        |> post(Routes.recipe_path(conn, :create), @create_attrs)
-        |> json_response(201)
-
-
-        created_recipe = Recipebook.Repo.get_by(Binder.Recipe, @create_attrs)
-
-        expected = %{
-          "data" =>
-          %{"title" => "Ice Cubes", "servings" => "1"}
-        }
-
-        assert created_recipe
-        assert response == expected
-      end
-
-      test "Renders error when data is invalid", %{conn: conn} do
+      test "Renders show when data is valid", %{conn: conn} do
         response =
           conn
-          |> post(Routes.recipe_path(conn, :create), @invalid_attrs)
-          |> text_response(422)
+          |> post(Routes.recipe_path(conn, :create), @create_attrs)
+          |> json_response(201)
 
-          expected = "Could not create recipe"
 
+          created_recipe = Recipebook.Repo.get_by(Binder.Recipe, @create_attrs)
+
+          expected = %{
+            "data" =>
+            %{"title" => "Ice Cubes", "servings" => "1"}
+          }
+
+          assert created_recipe
           assert response == expected
         end
 
-  end
+        test "Renders error when data is invalid", %{conn: conn} do
+          response =
+            conn
+            |> post(Routes.recipe_path(conn, :create), @invalid_attrs)
+            |> text_response(400)
 
-  defp create_recipe(_) do
-    {:ok, recipe} = Binder.create_recipe(@create_attrs)
-    {:ok, recipe: recipe}
-  end
+            expected = "Could not create recipe"
 
-end
+            assert response == expected
+          end
+        end
+
+        describe "delete/2" do
+
+          setup [:create_recipe]
+
+          test "delete/2 and responds with :ok if the recipe was deleted", %{conn: conn, recipe: recipe} do
+            response =
+              conn
+              |> delete(Routes.recipe_path(conn, :delete, recipe.id))
+              |> json_response(204)
+
+              expected = %{
+                "data" => [
+                  %{"title" => recipe.title, "servings" => recipe.servings}
+                ]
+              }
+              assert response == expected
+              refute Recipebook.Repo.get(Binder.Recipe, recipe.id)
+            end
+
+          end
+
+
+          defp create_recipe(_) do
+            {:ok, recipe} = Binder.create_recipe(@create_attrs)
+            {:ok, recipe: recipe}
+          end
+        end
