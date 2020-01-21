@@ -14,14 +14,13 @@ before_script:
 
 script:
   - mix test
-  - ./scripts/build_artifacts.sh
   - ./scripts/zip_project.sh
 
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    local_dir: zipped_project
+    local_dir: aws_deploy
     skip_cleanup: true
     bucket: mbdebbeler-apprenticeship-2
     region: us-east-2
@@ -31,8 +30,8 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: mbdebbeler-apprenticeship-2
-    key: latest.zip
-    bundle_type: zip
+    key: recipebook.tar.gz
+    bundle_type: tgz
     application: phoenix_recipe_book
     deployment_group: apprenticeship
     wait_until_deployed: true
