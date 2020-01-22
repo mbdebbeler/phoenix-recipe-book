@@ -30,7 +30,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: mbdebbeler-apprenticeship-2
-    key: recipebook.tar.gz
+    key: aws_deploy/recipebook.tar.gz
     bundle_type: tgz
     application: phoenix_recipe_book
     deployment_group: apprenticeship

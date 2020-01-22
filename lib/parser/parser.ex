@@ -1,13 +1,8 @@
 defmodule Parser do
-  def read_file(nil), do: Messages.get_prompt(:not_found)
 
-  def read_file(filepath) do
-    File.read!(Path.expand(filepath))
-  end
-
-  def parse_tokens(filepath) do
+  def parse_tokens(string) do
     tokens =
-      read_file(filepath)
+      string
       |> Lexer.lex()
 
     title = parse_title(tokens)
@@ -369,44 +364,6 @@ defmodule Parser do
     else
       %{min: Enum.min(list), max: Enum.max(list)}
     end
-  end
-
-  def prepare_recipe_index_map do
-    filepath = "./recipes/*.txt"
-    recipe_files = fetch_list_of_recipe_files(filepath)
-    recipe_names = parse_list_of_recipe_names(filepath)
-    Enum.zip(recipe_names, recipe_files) |> Enum.into(%{})
-  end
-
-  def fetch_list_of_recipe_files(filepath) do
-    Path.wildcard(filepath)
-  end
-
-  def parse_list_of_recipe_names(filepath) do
-    filepath
-    |> fetch_list_of_recipe_files
-    |> Enum.map(fn x -> Path.basename(x, ".txt") end)
-    |> Enum.map(fn x -> Regex.replace(~r/_/, x, " ") end)
-    |> Enum.map(fn x -> capitalize_each_word(x) end)
-  end
-
-  defp capitalize_each_word(string) do
-    String.split(string)
-    |> Enum.map(&String.capitalize/1)
-    |> Enum.join(" ")
-  end
-
-  def parse_grocery_list(filepath) do
-    recipe =
-      filepath
-      |> parse_tokens()
-
-    recipe
-  end
-
-  def generate_bulleted_list(items) do
-    items
-    |> Enum.map(fn x -> "- " <> x <> "\n" end)
   end
 
   def is_valid_quantity(str) do
