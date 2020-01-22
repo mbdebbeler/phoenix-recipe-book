@@ -5,6 +5,7 @@ defmodule RecipebookWeb.RecipeControllerTest do
   alias Recipebook.Binder.Recipe
   @create_attrs %{title: "Ice Cubes", servings: "1"}
   @update_attrs %{title: "Shaved Ice", servings: "100"}
+
   @invalid_attrs %{title: nil, servings: nil}
 
   describe "index/2" do
@@ -69,6 +70,7 @@ defmodule RecipebookWeb.RecipeControllerTest do
           |> post(Routes.recipe_path(conn, :create), @invalid_attrs)
           |> text_response(400)
 
+
           expected = "Could not create recipe"
 
           assert response == expected
@@ -122,6 +124,7 @@ defmodule RecipebookWeb.RecipeControllerTest do
             assert response == expected
           end
     end
+
 
 
   defp create_recipe(_) do

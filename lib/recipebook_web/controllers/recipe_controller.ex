@@ -62,5 +62,4 @@ defmodule RecipebookWeb.RecipeController do
       end
   end
 
-
 end
