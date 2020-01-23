@@ -18,4 +18,48 @@ defmodule RecipebookWeb.RecipeController do
           render(conn, "show.json", recipe: recipe)
         end
       end
+
+  def create(conn, %{"title" => _title, "servings" => _servings} = recipe_params) do
+    case Binder.create_recipe(recipe_params) do
+      {:ok, recipe} ->
+        conn
+        |> put_status(:created)
+        |> render("show.json", recipe: recipe)
+      {:error, _changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> text("Could not create recipe")
     end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    recipe = Binder.get_recipe!(id)
+    recipes = Binder.list_recipes()
+    case Binder.delete_recipe(recipe) do
+        {:ok, _recipe} ->
+          conn
+          |> put_status(:no_content)
+          |> render("index.json", recipes: recipes)
+        {:error, _changeset} ->
+          conn
+          |> put_status(:bad_request)
+          |> text("Could not delete recipe")
+    end
+  end
+
+  def update(conn, %{"id" => id, "recipe" => recipe_params}) do
+    recipe = Binder.get_recipe!(id)
+
+    case Binder.update_recipe(recipe, recipe_params) do
+      {:ok, recipe} ->
+        conn
+        |> put_status(:ok)
+        |> render("show.json", recipe: recipe)
+      {:error, _changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> text("Could not update recipe")
+      end
+  end
+
+end

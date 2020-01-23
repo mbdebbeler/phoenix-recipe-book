@@ -1,0 +1,7 @@
+---
+files:
+  -
+    destination: /home/ec2-user
+    source: /recipebook.tar.gz
+os: linux
+version: 0.0

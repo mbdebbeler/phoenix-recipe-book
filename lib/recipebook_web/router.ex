@@ -19,7 +19,6 @@ defmodule RecipebookWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
   scope "/api", RecipebookWeb do
     pipe_through :api
     resources "/recipes", RecipeController
