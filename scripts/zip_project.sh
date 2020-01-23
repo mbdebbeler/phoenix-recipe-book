@@ -1,4 +1,4 @@
 #!/bin/sh
-zip -r latest *
-mkdir -p zipped_project
-mv latest.zip zipped_project/latest.zip
+mkdir -p aws_deploy
+cp deploy_tarball/recipebook.tar.gz aws_deploy
+mv appspec.yml aws_deploy
