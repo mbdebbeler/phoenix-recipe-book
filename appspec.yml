@@ -1,18 +1,7 @@
-version: 0.0
-os: linux
+---
 files:
-  - source: ./
-  destination: /home/ec2-user
-
-# hooks:
-#   AfterInstall:
-#     - location: ./scripts/compile.sh
-#       runas: root
-#
-#   ApplicationStart:
-#     - location: ./scripts/start.sh
-#       runas: owner
-#
-#   ApplicationStop:
-#     - location: ./scripts/stop.sh
-#       runas: owner
+  -
+    destination: /home/ec2-user
+    source: /recipebook.tar.gz
+os: linux
+version: 0.0
