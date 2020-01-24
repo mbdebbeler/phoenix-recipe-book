@@ -19,8 +19,9 @@ defmodule RecipebookWeb.RecipeController do
         end
       end
 
-  def create(conn, %{"title" => _title, "servings" => _servings} = recipe_params) do
-    case Binder.create_recipe(recipe_params) do
+  def create(conn, _params) do
+    {:ok, data, _conn} = Plug.Conn.read_body(conn)
+    case Binder.create_recipe(data) do
       {:ok, recipe} ->
         conn
         |> put_status(:created)
@@ -47,10 +48,10 @@ defmodule RecipebookWeb.RecipeController do
     end
   end
 
-  def update(conn, %{"id" => id, "recipe" => recipe_params}) do
+  def update(conn, %{"id" => id}) do
     recipe = Binder.get_recipe!(id)
-
-    case Binder.update_recipe(recipe, recipe_params) do
+    {:ok, new_data, _conn_details} = Plug.Conn.read_body(conn)
+    case Binder.update_recipe(recipe, new_data) do
       {:ok, recipe} ->
         conn
         |> put_status(:ok)
