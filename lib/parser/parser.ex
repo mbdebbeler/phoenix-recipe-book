@@ -5,13 +5,19 @@ defmodule Parser do
       string
       |> Lexer.lex()
 
-    title = parse_title(tokens)
-    servings = parse_servings(tokens)
-    directions = parse_directions(tokens)
-    ingredients = parse_ingredients(tokens)
+    case length(tokens) > 1 do
+      :true ->
+        title = parse_title(tokens)
+        servings = parse_servings(tokens)
+        directions = parse_directions(tokens)
+        ingredients = parse_ingredients(tokens)
 
-    %Recipe{title: title, servings: servings, directions: directions, ingredients: ingredients}
+        {:ok, %Recipe{title: title, servings: servings, directions: directions, ingredients: ingredients}}
+      _ ->
+        {:error}
+    end
   end
+
 
   def parse_title(tokens) do
     target_line = 1

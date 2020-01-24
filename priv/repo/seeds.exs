@@ -12,12 +12,14 @@ defmodule Recipebook.DatabaseSeeder do
   alias Recipebook.Binder.Recipe
 
   @titles_list ["Toast", "Ice Cubes", "Boiling Water"]
-  @servings_list ["99", "1", "5"]
+  @min_servings_list [1, 2]
+  @max_servings_list [99, 3, 5]
 
   def insert_recipe do
     Repo.insert! %Recipe{
       title: (@titles_list |> Enum.random()),
-      servings: (@servings_list |> Enum.random())
+      min_servings: (@min_servings_list |> Enum.random()),
+      max_servings: (@max_servings_list |> Enum.random())
     }
   end
 

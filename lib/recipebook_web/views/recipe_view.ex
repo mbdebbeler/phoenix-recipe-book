@@ -10,7 +10,7 @@ defmodule RecipebookWeb.RecipeView do
   end
 
   def render("recipe.json", %{recipe: recipe}) do
-    %{title: recipe.title, servings: recipe.servings}
+    %{title: recipe.title, min_servings: recipe.min_servings, max_servings: recipe.max_servings}
   end
 
 end

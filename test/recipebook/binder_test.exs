@@ -6,22 +6,23 @@ defmodule Recipebook.BinderTest do
   describe "recipes" do
     alias Recipebook.Binder.Recipe
 
-    @valid_attrs %{servings: "some servings", title: "some title"}
-    @update_attrs %{servings: "some updated servings", title: "some updated title"}
-    @invalid_attrs %{servings: nil, title: nil}
+    @valid_recipe_filepath "assets/static/recipes/esquites.txt"
+    @update_recipe_filepath "assets/static/recipes/mujaddara.txt"
+    @invalid_recipe_filepath "assets/static/recipes/invalid.txt"
 
-    def recipe_fixture(attrs \\ %{}) do
-      {:ok, recipe} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Binder.create_recipe()
-
+    def recipe_fixture() do
+      data = File.read!(@valid_recipe_filepath)
+      {:ok, recipe} = Binder.create_recipe(data)
       recipe
+    end
+
+    def generate_request_body(filepath) do
+      File.read!(filepath)
     end
 
     test "list_recipes/0 returns all recipes" do
       recipe = recipe_fixture()
-      assert Binder.list_recipes() == [recipe]
+      assert Enum.member?(Binder.list_recipes(), recipe)
     end
 
     test "get_recipe!/1 returns the recipe with given id" do
@@ -30,25 +31,31 @@ defmodule Recipebook.BinderTest do
     end
 
     test "create_recipe/1 with valid data creates a recipe" do
-      assert {:ok, %Recipe{} = recipe} = Binder.create_recipe(@valid_attrs)
-      assert recipe.servings == "some servings"
-      assert recipe.title == "some title"
+      request_body = generate_request_body(@valid_recipe_filepath)
+      assert {:ok, %Recipe{} = recipe} = Binder.create_recipe(request_body)
+      assert recipe.min_servings == 6
+      assert recipe.max_servings == 8
+      assert recipe.title == "Mexican Corn Salad (Esquites)"
     end
 
     test "create_recipe/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Binder.create_recipe(@invalid_attrs)
+      request_body = generate_request_body(@invalid_recipe_filepath)
+      assert {:error, %Ecto.Changeset{}} = Binder.create_recipe(request_body)
     end
 
     test "update_recipe/2 with valid data updates the recipe" do
       recipe = recipe_fixture()
-      assert {:ok, %Recipe{} = recipe} = Binder.update_recipe(recipe, @update_attrs)
-      assert recipe.servings == "some updated servings"
-      assert recipe.title == "some updated title"
+      valid_request_body = generate_request_body(@update_recipe_filepath)
+      assert {:ok, %Recipe{} = recipe} = Binder.update_recipe(recipe, valid_request_body)
+      assert recipe.min_servings == 4
+      assert recipe.max_servings == 6
+      assert recipe.title == "Rice and Lentils with Crispy Onions (Mujaddara)"
     end
 
     test "update_recipe/2 with invalid data returns error changeset" do
       recipe = recipe_fixture()
-      assert {:error, %Ecto.Changeset{}} = Binder.update_recipe(recipe, @invalid_attrs)
+      invalid_request_body = generate_request_body(@invalid_recipe_filepath)
+      assert {:error, %Ecto.Changeset{}} = Binder.update_recipe(recipe, invalid_request_body)
       assert recipe == Binder.get_recipe!(recipe.id)
     end
 

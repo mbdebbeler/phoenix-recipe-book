@@ -50,10 +50,16 @@ defmodule Recipebook.Binder do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_recipe(attrs \\ %{}) do
-    %Recipe{}
-    |> Recipe.changeset(attrs)
-    |> Repo.insert()
+  def create_recipe(data) do
+    case Parser.parse_tokens(data) do
+      {:ok, parsed_recipe} ->
+        recipe_map = Map.from_struct(parsed_recipe)
+        %Recipe{}
+        |> Recipe.changeset(%{title: recipe_map.title, min_servings: recipe_map.servings.min, max_servings: recipe_map.servings.max})
+        |> Repo.insert()
+      {:error} ->
+        {:error, Recipe.changeset(%Recipe{}, %{title: nil, min_servings: nil, max_servings: nil})}
+    end
   end
 
   @doc """
@@ -68,10 +74,17 @@ defmodule Recipebook.Binder do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_recipe(%Recipe{} = recipe, attrs) do
-    recipe
-    |> Recipe.changeset(attrs)
-    |> Repo.update()
+  def update_recipe(%Recipe{} = recipe, new_data) do
+    case Parser.parse_tokens(new_data) do
+      {:ok, parsed_recipe} ->
+        recipe_map = Map.from_struct(parsed_recipe)
+        recipe
+        |> Recipe.changeset(%{title: recipe_map.title, min_servings: recipe_map.servings.min, max_servings: recipe_map.servings.max})
+        |> Repo.update()
+      {:error} ->
+        {:error, Recipe.changeset(%Recipe{}, %{title: nil, min_servings: nil, max_servings: nil})}
+    end
+
   end
 
   @doc """
