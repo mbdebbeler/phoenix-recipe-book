@@ -3,7 +3,8 @@ defmodule Recipebook.Binder.Recipe do
   import Ecto.Changeset
 
   schema "recipes" do
-    field :servings, :string
+    field :min_servings, :integer
+    field :max_servings, :integer
     field :title, :string
 
     timestamps()
@@ -12,7 +13,7 @@ defmodule Recipebook.Binder.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :servings])
-    |> validate_required([:title, :servings])
+    |> cast(attrs, [:title, :min_servings, :max_servings])
+    |> validate_required([:title])
   end
 end

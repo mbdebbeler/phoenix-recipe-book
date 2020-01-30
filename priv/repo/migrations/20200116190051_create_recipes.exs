@@ -4,7 +4,8 @@ defmodule Recipebook.Repo.Migrations.CreateRecipes do
   def change do
     create table(:recipes) do
       add :title, :string
-      add :servings, :string
+      add :min_servings, :integer
+      add :max_servings, :integer
 
       timestamps()
     end
