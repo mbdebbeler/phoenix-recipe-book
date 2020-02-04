@@ -1,10 +1,8 @@
 class Networking {
-
-  get(url) {
+  get (url) {
     return fetch(url)
-    .then(res => res.json());
+      .then(res => res.json())
   }
-
 };
 
-export default Networking;
+export default Networking

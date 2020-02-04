@@ -1,29 +1,27 @@
-import React from "react"
-import RecipeCard from "../presentationals/RecipeCard"
-import RecipeList from "./RecipeList"
+import React from 'react'
+import RecipeList from './RecipeList'
 
 class Recipes extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {recipes: []};
+  constructor () {
+    super()
+    this.state = { recipes: [] }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const url = 'http://localhost:4000/api/recipes'
     this.props.networking.get(url)
-    .then((data) => {
-      this.setState({recipes: data.data})
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      .then((data) => {
+        this.setState({ recipes: data.data })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
-  render() {
+  render () {
     return (
       <div>
-      <RecipeList recipes={this.state.recipes} />
+        <RecipeList recipes={this.state.recipes} />
       </div>
     )
   }
