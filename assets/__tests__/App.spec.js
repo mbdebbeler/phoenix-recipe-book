@@ -1,6 +1,6 @@
 import React from "react";
 import Adapter from "enzyme-adapter-react-16";
-import App from "../js/App";
+import App from "../js/app";
 import Recipes from "../js/containers/Recipes";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
