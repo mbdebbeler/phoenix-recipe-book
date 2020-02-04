@@ -13,9 +13,9 @@ before_script:
   - mix do ecto.create, ecto.migrate
 
 script:
-  - mix test
-#   - ./scripts/zip_project.sh
-#
+  - ./scripts/run_unit_tests.sh
+  - ./scripts/run_front_end_tests.sh
+
 # deploy:
 #   - provider: s3
 #     access_key_id: $AWS_ACCESS_KEY
