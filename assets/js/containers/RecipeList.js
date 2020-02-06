@@ -13,7 +13,7 @@ class RecipeList extends React.Component {
     })
 
     return (
-      <div className="mdc-layout-grid__inner">
+      <div className="mdc-layout-grid__inner my-body">
         {recipes}
       </div>
     )

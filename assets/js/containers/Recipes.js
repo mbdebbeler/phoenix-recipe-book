@@ -21,9 +21,7 @@ class Recipes extends React.Component {
   render () {
     return (
       <div>
-        <div>
           <RecipeList recipes={this.state.recipes} />
-        </div>
       </div>
     )
   }
