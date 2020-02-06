@@ -6,8 +6,10 @@ import Networking from './networking'
 class App extends React.Component {
   render () {
     return (
-      <div>
-        <Recipes networking={new Networking()} />
+      <div className="mdc-layout-grid">
+        <div>
+          <Recipes networking={new Networking()} />
+        </div>
       </div>
     )
   }

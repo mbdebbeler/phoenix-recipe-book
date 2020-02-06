@@ -1,9 +1,13 @@
 /* This file is for your main application css. */
 #app {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
   font-family: Roboto;
+}
+
+.my-card-content {
+  padding: 16px;
 }
