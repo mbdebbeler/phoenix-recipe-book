@@ -3,6 +3,12 @@ class RecipeCard extends React.Component {
   render () {
     return (
       <div className="card">
+        <label className="mdc-text-field">
+  <input type="text" className="mdc-text-field__input" aria-labelledby="my-label"></input>
+  <span className="mdc-floating-label" id="my-label">Label</span>
+  <div className="mdc-line-ripple"></div>
+</label>
+
         <div className="card-content">
           <div className="media">
             <div className="media-content">
