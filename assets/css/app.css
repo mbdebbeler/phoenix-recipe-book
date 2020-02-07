@@ -39,6 +39,6 @@ body {
   color: var(--mdc-theme-primary);
 }
 
-.mdc-menu .mdc-list{
+.mdc-menu .mdc-list {
   background-color: var(--mdc-theme-background);
 }
