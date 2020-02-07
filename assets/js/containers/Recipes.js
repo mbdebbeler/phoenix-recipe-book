@@ -20,7 +20,7 @@ class Recipes extends React.Component {
 
   render () {
     return (
-          <RecipeList recipes={this.state.recipes} />
+      <RecipeList recipes={this.state.recipes} />
     )
   }
 }

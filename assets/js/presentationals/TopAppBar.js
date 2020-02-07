@@ -1,22 +1,15 @@
 import React from 'react'
-import {MDCTopAppBar} from "@material/top-app-bar";
-import {MDCDrawer} from "@material/drawer";
+import { MDCTopAppBar } from '@material/top-app-bar'
+import { MDCDrawer } from '@material/drawer'
 
 class TopAppBar extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-    this.drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
-    this.topAppBar = MDCTopAppBar.attachTo(document.getElementById('app-bar'));
-    this.topAppBar.setScrollTarget(document.getElementById('recipes'));
+  componentDidMount () {
+    this.drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'))
+    this.topAppBar = MDCTopAppBar.attachTo(document.getElementById('app-bar'))
+    this.topAppBar.setScrollTarget(document.getElementById('recipes'))
     this.topAppBar.listen('MDCTopAppBar:nav', () => {
-      this.drawer.open = !this.drawer.open;
-    });
-  }
-
-  componentDidUpdate() {
+      this.drawer.open = !this.drawer.open
+    })
   }
 
   render () {

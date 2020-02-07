@@ -2,23 +2,23 @@ import React from 'react'
 import CardMenu from './CardMenu'
 
 class RecipeCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: false};
-    this.handleClick = this.handleClick.bind(this);
+  constructor (props) {
+    super(props)
+    this.state = { isToggleOn: false }
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() {
+  handleClick () {
     this.setState(state => ({
       isToggleOn: !state.isToggleOn
-    }));
+    }))
   }
 
   render () {
     return (
       <div className="mdc-layout-grid__cell">
         <div className="mdc-card my-card-content">
-          <button className={"mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded my-more-vert mdc-menu-surface--anchor"} onClick={this.handleClick} title="More options" data-mdc-ripple-is-unbounded="true">more_vert <CardMenu id={this.props.id} isToggleOn={this.state.isToggleOn}/> </button>
+          <button className={'mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded my-more-vert mdc-menu-surface--anchor'} onClick={this.handleClick} title="More options" data-mdc-ripple-is-unbounded="true">more_vert <CardMenu id={this.props.id} isToggleOn={this.state.isToggleOn}/> </button>
           <div className="mdc-card__primary-action demo-card__primary-action" tabIndex="0">
             <div className="demo-card__primary">
               <h2 className="demo-card__title mdc-typography mdc-typography--headline6">{this.props.title}</h2>
@@ -31,8 +31,8 @@ class RecipeCard extends React.Component {
             </div>
           </div>
         </div>
-    </div>
-  )
-}
+      </div>
+    )
+  }
 }
 export default RecipeCard

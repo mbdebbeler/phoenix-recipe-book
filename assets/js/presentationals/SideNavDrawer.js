@@ -1,18 +1,7 @@
 import React from 'react'
-import {MDCDrawer} from "@material/drawer";
 
 class SideNavDrawer extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-  }
-  componentDidUpdate() {
-  }
-
-  render() {
+  render () {
     return (
       <div>
         <aside className="mdc-drawer mdc-drawer--modal">

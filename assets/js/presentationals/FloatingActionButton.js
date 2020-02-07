@@ -1,7 +1,7 @@
 import React from 'react'
 
 class FloatingActionButton extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <button className="mdc-fab app-fab--absolute" aria-label="Add">
@@ -10,7 +10,6 @@ class FloatingActionButton extends React.Component {
       </div>
     )
   }
-
 }
 
 export default FloatingActionButton
