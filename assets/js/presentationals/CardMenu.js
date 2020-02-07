@@ -1,7 +1,6 @@
 import React from 'react'
 import {MDCMenu} from '@material/menu';
 
-
 class CardMenu extends React.Component {
   constructor(props) {
     super(props)

@@ -1,8 +1,5 @@
 import React from 'react'
 import CardMenu from './CardMenu'
-import Button from '@material-ui/core/Button';
-
-
 
 class RecipeCard extends React.Component {
   constructor(props) {
