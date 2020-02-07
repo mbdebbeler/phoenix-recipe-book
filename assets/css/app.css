@@ -12,6 +12,7 @@ body {
 }
 
 .my-body {
+  padding-top: 64px;
   margin-left: 10%;
   margin-right: 10%;
 }
