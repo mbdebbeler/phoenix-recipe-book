@@ -1,14 +1,17 @@
+:root {
+  --mdc-theme-primary: #7F0000;
+  --mdc-theme-secondary: #002171;
+  --mdc-theme-surface: #FFE082;
+  --card-scrim: #CAAE53;
+}
+
+
 body {
-  font-family: Roboto;
   margin: 0;
 }
 
 .my-more-vert {
   margin-left: 80%;
-}
-
-.my-menu {
-  background-color: pink;
 }
 
 .my-body {
@@ -30,4 +33,12 @@ body {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+}
+
+.mdc-drawer .mdc-list-item {
+  color: var(--mdc-theme-primary);
+}
+
+.mdc-menu .mdc-list{
+  background-color: var(--mdc-theme-background);
 }
