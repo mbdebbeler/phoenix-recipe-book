@@ -3,6 +3,14 @@ body {
   margin: 0;
 }
 
+.my-more-vert {
+  margin-left: 80%;
+}
+
+.my-menu {
+  background-color: pink;
+}
+
 .my-body {
   margin-left: 10%;
   margin-right: 10%;
