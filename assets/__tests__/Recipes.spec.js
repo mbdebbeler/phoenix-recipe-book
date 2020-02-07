@@ -16,7 +16,7 @@ describe('Recipes', () => {
     wrapper = shallow(<Recipes networking={networking} />)
   })
 
-  it('should render a <div />', () => {
-    expect(wrapper.find('div')).toHaveLength(1)
+  it('should render RecipeList directly without making a div', () => {
+    expect(wrapper.find('div')).toHaveLength(0)
   })
 })
