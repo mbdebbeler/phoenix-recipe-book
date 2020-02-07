@@ -4,8 +4,8 @@ class FloatingActionButton extends React.Component {
   render() {
     return (
       <div>
-        <button className="mdc-fab app-fab--absolute" aria-label="Favorite">
-          <span className="mdc-fab__icon material-icons">favorite</span>
+        <button className="mdc-fab app-fab--absolute" aria-label="Add">
+          <span className="mdc-fab__icon material-icons">add</span>
         </button>
       </div>
     )
