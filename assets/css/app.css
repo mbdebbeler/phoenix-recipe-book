@@ -15,7 +15,7 @@ body {
 }
 
 .my-body {
-  padding-top: 64px;
+  padding-top: 72px;
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -41,4 +41,8 @@ body {
 
 .mdc-menu .mdc-list {
   background-color: var(--mdc-theme-background);
+}
+
+.spacer {
+  height: 20px;
 }
