@@ -6,6 +6,7 @@ class RecipeList extends React.Component {
     const recipes = this.props.recipes.map(function (recipe, index) {
       return <RecipeCard
         key = { index }
+        id = { index }
         title = { recipe.title }
         min_servings = { recipe.min_servings }
         max_servings = { recipe.max_servings }
@@ -13,7 +14,7 @@ class RecipeList extends React.Component {
     })
 
     return (
-      <div>
+      <div className="mdc-layout-grid__inner my-body" id="recipes">
         {recipes}
       </div>
     )

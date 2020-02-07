@@ -1,8 +1,48 @@
-/* This file is for your main application css. */
-#app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+:root {
+  --mdc-theme-primary: #7F0000;
+  --mdc-theme-secondary: #002171;
+  --mdc-theme-surface: #FFE082;
+  --card-scrim: #CAAE53;
+}
+
+
+body {
+  margin: 0;
+}
+
+.my-more-vert {
+  margin-left: 80%;
+}
+
+.my-body {
+  padding-top: 72px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.my-card-content {
+  padding: 16px;
+}
+
+.alert {
+  padding: 0;
+  margin: 0;
+}
+
+.app-fab--absolute {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.mdc-drawer .mdc-list-item {
+  color: var(--mdc-theme-primary);
+}
+
+.mdc-menu .mdc-list {
+  background-color: var(--mdc-theme-background);
+}
+
+.spacer {
+  height: 20px;
 }
